@@ -9,9 +9,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CounterPage(),
+      home: const CounterPage(),
+      routes: {ImagePage.routeName: (context) => const ImagePage()},
     );
   }
 }
@@ -150,7 +151,9 @@ class _CounterPageState extends State<CounterPage> {
 
                 // SEGUNDO BOTÓN INFERIOR
                 ElevatedButton(
-                  onPressed: null,
+                  onPressed: () {
+                    Navigator.pushNamed(context, ImagePage.routeName);
+                  },
                   child: const Text(
                     'Segundo botón',
                     style: TextStyle(fontSize: 16),
@@ -159,6 +162,34 @@ class _CounterPageState extends State<CounterPage> {
 
                 const SizedBox(height: 25),
               ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ImagePage extends StatelessWidget {
+  const ImagePage({super.key});
+
+  static const routeName = '/imagen';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Ventana con imagen')),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(18),
+            child: Image.asset(
+              'web/icons/Icon-512.png',
+              key: const Key('routeImage'),
+              width: 300,
+              height: 300,
+              fit: BoxFit.cover,
             ),
           ),
         ),

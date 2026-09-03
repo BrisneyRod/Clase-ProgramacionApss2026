@@ -23,13 +23,6 @@ void main() {
     final bottomButton = find.widgetWithText(ElevatedButton, 'Botón');
     expect(tester.widget<ElevatedButton>(bottomButton).onPressed, isNull);
 
-    // Verify that the second bottom button has no action either.
-    final secondBottomButton = find.widgetWithText(
-      ElevatedButton,
-      'Segundo botón',
-    );
-    expect(tester.widget<ElevatedButton>(secondBottomButton).onPressed, isNull);
-
     // Tap the '+' button and trigger a frame.
     await tester.tap(find.text('+'));
     await tester.pump();
@@ -37,5 +30,31 @@ void main() {
     // Verify that our counter has incremented.
     expect(find.text('0'), findsNothing);
     expect(find.text('1'), findsOneWidget);
+  });
+
+  testWidgets('Second button opens the image route', (
+    WidgetTester tester,
+  ) async {
+    await tester.pumpWidget(const MyApp());
+
+    final secondBottomButton = find.widgetWithText(
+      ElevatedButton,
+      'Segundo botón',
+    );
+    expect(
+      tester.widget<ElevatedButton>(secondBottomButton).onPressed,
+      isNotNull,
+    );
+
+    await tester.ensureVisible(secondBottomButton);
+    await tester.tap(secondBottomButton);
+    await tester.pumpAndSettle();
+
+    expect(find.text('Ventana con imagen'), findsOneWidget);
+    expect(find.byKey(const Key('routeImage')), findsOneWidget);
+    final imagePageRoute = ModalRoute.of(
+      tester.element(find.byType(ImagePage)),
+    );
+    expect(imagePageRoute?.settings.name, ImagePage.routeName);
   });
 }
