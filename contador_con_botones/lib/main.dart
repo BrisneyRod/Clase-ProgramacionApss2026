@@ -146,6 +146,17 @@ class _CounterPageState extends State<CounterPage> {
                   child: const Text('Botón', style: TextStyle(fontSize: 16)),
                 ),
 
+                const SizedBox(height: 10),
+
+                // SEGUNDO BOTÓN INFERIOR
+                ElevatedButton(
+                  onPressed: null,
+                  child: const Text(
+                    'Segundo botón',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+
                 const SizedBox(height: 25),
               ],
             ),

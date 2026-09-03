@@ -23,6 +23,13 @@ void main() {
     final bottomButton = find.widgetWithText(ElevatedButton, 'Botón');
     expect(tester.widget<ElevatedButton>(bottomButton).onPressed, isNull);
 
+    // Verify that the second bottom button has no action either.
+    final secondBottomButton = find.widgetWithText(
+      ElevatedButton,
+      'Segundo botón',
+    );
+    expect(tester.widget<ElevatedButton>(secondBottomButton).onPressed, isNull);
+
     // Tap the '+' button and trigger a frame.
     await tester.tap(find.text('+'));
     await tester.pump();
