@@ -141,13 +141,9 @@ class _CounterPageState extends State<CounterPage> {
                 const SizedBox(height: 25),
 
                 // BOTÓN INFERIOR
-                ElevatedButton.icon(
-                  onPressed: incrementar,
-                  icon: const Icon(Icons.add),
-                  label: const Text(
-                    'Incrementar contador',
-                    style: TextStyle(fontSize: 16),
-                  ),
+                ElevatedButton(
+                  onPressed: null,
+                  child: const Text('Botón', style: TextStyle(fontSize: 16)),
                 ),
 
                 const SizedBox(height: 25),
