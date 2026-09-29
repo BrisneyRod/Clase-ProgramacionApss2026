@@ -1,30 +1,82 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
+import 'package:deber1_estado_streams/domain/repositories/contador_repository.dart';
+import 'package:deber1_estado_streams/main.dart';
+import 'package:deber1_estado_streams/presentation/estado/contador_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:deber1_estado_streams/main.dart';
+class _RepositorioMemoria implements ContadorRepository {
+  _RepositorioMemoria(this.valor);
+
+  int valor;
+
+  @override
+  Future<int> leer() async => valor;
+
+  @override
+  Future<void> guardar(int valor) async {
+    this.valor = valor;
+  }
+}
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Riverpod comparte el contador entre pantallas', (tester) async {
+    final repository = _RepositorioMemoria(0);
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [contadorRepositoryProvider.overrideWithValue(repository)],
+        child: const MyApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    expect(find.text('Contador: 0'), findsOneWidget);
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    await tester.tap(find.text('Ir a Control'));
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('+1'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('+1'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('+1'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Contador: 3'), findsOneWidget);
+    expect(repository.valor, 3);
+
+    await tester.tap(find.text('Volver'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Visor'), findsOneWidget);
+    expect(find.text('Contador: 3'), findsOneWidget);
+  });
+
+  testWidgets('el boton atras normal no deja el visor desactualizado', (
+    tester,
+  ) async {
+    final repository = _RepositorioMemoria(3);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [contadorRepositoryProvider.overrideWithValue(repository)],
+        child: const MyApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.text('Ir a Control'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('+1'));
+    await tester.pumpAndSettle();
+
+    expect(repository.valor, 4);
+    expect(find.text('Contador: 4'), findsOneWidget);
+
+    await tester.binding.handlePopRoute();
+    await tester.pumpAndSettle();
+
+    expect(find.text('Visor'), findsOneWidget);
+    expect(find.text('Contador: 4'), findsOneWidget);
   });
 }
