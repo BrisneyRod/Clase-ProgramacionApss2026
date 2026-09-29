@@ -48,7 +48,7 @@ origin https://github.com/BrisneyRod/Clase-ProgramacionApss2026.git
 
 | Metrica | Rama vibe | Rama sdd |
 | --- | --- | --- |
-| Iteraciones (veces que le tuviste que volver a pedir algo) |  |  |
+| Iteraciones (veces que le tuviste que volver a pedir algo) | 1 |  |
 | Casos de aceptacion que cumple (0-6) |  |  |
 | Pruebas automatizadas que pasan |  |  |
 | Archivos en `lib/` |  |  |
@@ -63,3 +63,10 @@ origin https://github.com/BrisneyRod/Clase-ProgramacionApss2026.git
 | Metrica secundaria opcional | Rama vibe | Rama sdd |
 | --- | --- | --- |
 | Tiempo aproximado hasta cumplir los 6 escenarios |  |  |
+
+## Decisiones de conteo
+
+| Rama | Mensaje | Conteo |
+| --- | --- | --- |
+| vibe | "Hazme una app en Flutter para dividir la cuenta entre varias personas." | Solicitud inicial, no cuenta |
+| vibe | "quiero que pongas opciones para gente que quiera pagar menos o quiera pagar mas" | Iteracion 1 |
