@@ -78,3 +78,24 @@ Configuracion de razonamiento: misma sesion/configuracion usada para `vibe` y `s
 | Metrica secundaria opcional | Rama vibe | Rama sdd |
 | --- | --- | --- |
 | Tiempo aproximado hasta cumplir los 6 escenarios |  |  |
+
+## Verificacion de especificacion SDD
+
+Feature generada: `specs/001-dividir-cuenta/spec.md`.
+
+Revision de comportamiento inventado:
+
+- No se agregaron funciones nuevas al alcance funcional pedido.
+- La spec excluye explicitamente pagos diferenciados, valores fijos, historial,
+  persistencia, red, base de datos y monedas multiples.
+- Se agregaron supuestos para hacer comprobables los terminos del enunciado:
+  la propina es porcentaje del monto total; modo exacto muestra dos decimales;
+  modo hacia arriba sube al entero mas cercano y se muestra con dos decimales.
+
+Clarify hizo una pregunta relevante:
+
+- Pregunta: Como debe comportarse la app si el usuario ingresa un monto, numero
+  de personas o porcentaje de propina negativo?
+- Respuesta registrada: rechazar cualquier valor negativo con mensaje de error.
+- Evaluacion: fue relevante porque afecta validacion, pruebas y mensajes de
+  error; la especificacion inicial solo cubria monto no numerico y 0 personas.
