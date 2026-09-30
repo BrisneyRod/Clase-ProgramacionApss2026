@@ -46,6 +46,21 @@ Remoto configurado:
 origin https://github.com/BrisneyRod/Clase-ProgramacionApss2026.git
 ```
 
+## Agente usado
+
+Agente: Codex CLI.
+
+Version:
+
+```text
+codex-cli 0.155.0-alpha.16.3
+```
+
+Archivo de instrucciones creado para el agente: `AGENTS.md`.
+
+Modelo usado: Codex basado en GPT-5.
+Configuracion de razonamiento: misma sesion/configuracion usada para `vibe` y `sdd`.
+
 | Metrica | Rama vibe | Rama sdd |
 | --- | --- | --- |
 | Iteraciones (veces que le tuviste que volver a pedir algo) |  |  |
@@ -53,10 +68,10 @@ origin https://github.com/BrisneyRod/Clase-ProgramacionApss2026.git
 | Pruebas automatizadas que pasan |  |  |
 | Archivos en `lib/` |  |  |
 | Lineas de codigo en `lib/` |  |  |
-| ¿`domain/` depende de Flutter? |  |  |
-| ¿Existe separacion `presentation/domain/data`? |  |  |
-| ¿El agente agrego algo que nadie pidio? |  |  |
-| ¿Se puede agregar otra estrategia sin modificar el calculo existente? |  |  |
+| `domain/` depende de Flutter? |  |  |
+| Existe separacion `presentation/domain/data`? |  |  |
+| El agente agrego algo que nadie pidio? |  |  |
+| Se puede agregar otra estrategia sin modificar el calculo existente? |  |  |
 
 ## Metrica secundaria opcional
 
