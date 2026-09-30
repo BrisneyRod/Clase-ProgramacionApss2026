@@ -1,25 +1,42 @@
 # Instrucciones del agente
 
-Agente usado: Codex CLI.
+Este proyecto es una app Flutter de una sola pantalla para dividir una cuenta.
+Debe permitir ingresar monto total, numero de personas y porcentaje de propina,
+y mostrar cuanto paga cada persona.
 
-Version detectada:
+## Estructura
+
+Usa esta estructura para el codigo de la app:
+
+- `lib/presentation`
+- `lib/domain`
+- `lib/data`
+
+La regla de dependencia es:
 
 ```text
-codex-cli 0.155.0-alpha.16.3
+presentation -> domain <- data
 ```
 
-Modelo usado en esta practica: Codex basado en GPT-5.
-Configuracion de razonamiento: la misma sesion/configuracion usada para la rama `vibe`.
+`domain` no debe importar nada de `package:flutter`.
 
-## Reglas para esta rama SDD
+## Estandares
 
-- Trabajar solo en la rama `sdd`.
-- No modificar `main` ni la rama `vibe`.
-- Mantener el alcance del MVP: una app Flutter de una pantalla para dividir una cuenta.
-- Usar SDD antes de implementar: constitution, specify, clarify, plan, tasks, analyze e implement.
-- Mantener las reglas SOLID y arquitectura limpia en la Constitution.
-- Separar responsabilidades entre `presentation`, `domain` y `data` cuando exista codigo de aplicacion.
-- El dominio no debe depender de Flutter.
-- No agregar funciones fuera del alcance acordado sin registrarlas como decision.
-- Registrar iteraciones, decisiones y metricas en `bitacora.md`.
-- Verificar con comandos cuando el entorno lo permita y anotar cualquier bloqueo.
+- Usa null safety.
+- Usa nombres en espanol.
+- No agregues paquetes externos.
+
+## Que no tocar
+
+- No modifiques `test/` sin que el usuario lo pida.
+- No agregues dependencias al `pubspec.yaml` sin avisar.
+- No toques `android/` ni `ios/`.
+
+## Comandos utiles
+
+```bash
+flutter pub get
+flutter run
+flutter analyze
+flutter test
+```
