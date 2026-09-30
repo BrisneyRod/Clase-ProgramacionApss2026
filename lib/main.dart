@@ -33,6 +33,7 @@ class _BillSplitterPageState extends State<BillSplitterPage> {
   final _tipController = TextEditingController(text: '10');
   final _lessPeopleController = TextEditingController(text: '0');
   final _morePeopleController = TextEditingController(text: '0');
+  final _fixedPeopleController = TextEditingController(text: '0');
   final _fixedAmountController = TextEditingController(text: '0');
 
   bool _hasFixedPayer = false;
@@ -44,6 +45,7 @@ class _BillSplitterPageState extends State<BillSplitterPage> {
     _tipController.dispose();
     _lessPeopleController.dispose();
     _morePeopleController.dispose();
+    _fixedPeopleController.dispose();
     _fixedAmountController.dispose();
     super.dispose();
   }
@@ -53,9 +55,12 @@ class _BillSplitterPageState extends State<BillSplitterPage> {
   double get _tipPercent => double.tryParse(_tipController.text) ?? 0;
   int get _lessPeople => int.tryParse(_lessPeopleController.text) ?? 0;
   int get _morePeople => int.tryParse(_morePeopleController.text) ?? 0;
-  double get _fixedAmount =>
+  int get _fixedPeopleInput =>
+      _hasFixedPayer ? int.tryParse(_fixedPeopleController.text) ?? 0 : 0;
+  int get _fixedPeople => _fixedPeopleInput.clamp(0, _people).toInt();
+  double get _fixedAmountPerPerson =>
       _hasFixedPayer ? double.tryParse(_fixedAmountController.text) ?? 0 : 0;
-  int get _fixedPeople => _hasFixedPayer && _people > 0 ? 1 : 0;
+  double get _fixedTotal => _fixedPeople * _fixedAmountPerPerson;
   int get _flexiblePeople => (_people - _fixedPeople).clamp(0, _people).toInt();
   int get _safeLessPeople => _lessPeople.clamp(0, _flexiblePeople).toInt();
   int get _safeMorePeople =>
@@ -68,7 +73,7 @@ class _BillSplitterPageState extends State<BillSplitterPage> {
   double get _tipAmount => _total * (_tipPercent / 100);
   double get _grandTotal => _total + _tipAmount;
   double get _remainingTotal =>
-      (_grandTotal - _fixedAmount).clamp(0, _grandTotal).toDouble();
+      (_grandTotal - _fixedTotal).clamp(0, _grandTotal).toDouble();
   double get _weightedUnits =>
       (_safeLessPeople * 0.75) + _normalPeople + (_safeMorePeople * 1.25);
   double get _baseShare =>
@@ -91,7 +96,7 @@ class _BillSplitterPageState extends State<BillSplitterPage> {
             ),
             const SizedBox(height: 6),
             Text(
-              'Puedes dejar una persona con pago fijo y repartir el resto.',
+              'Puedes dejar personas con pago fijo y repartir el resto.',
               style: Theme.of(context).textTheme.bodyMedium,
             ),
             const SizedBox(height: 20),
@@ -133,18 +138,31 @@ class _BillSplitterPageState extends State<BillSplitterPage> {
                 SwitchListTile(
                   value: _hasFixedPayer,
                   contentPadding: EdgeInsets.zero,
-                  title: const Text('Una persona paga un valor fijo'),
+                  title: const Text('Hay personas con valor fijo'),
                   subtitle: const Text(
                     'Ese valor se descuenta antes de repartir',
                   ),
                   onChanged: (value) => setState(() => _hasFixedPayer = value),
                 ),
                 if (_hasFixedPayer)
-                  _numberField(
-                    controller: _fixedAmountController,
-                    label: 'Valor fijo de esa persona',
-                    prefixText: r'$ ',
-                    decimal: true,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: _numberField(
+                          controller: _fixedPeopleController,
+                          label: 'Personas fijas',
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: _numberField(
+                          controller: _fixedAmountController,
+                          label: 'Valor fijo',
+                          prefixText: r'$ ',
+                          decimal: true,
+                        ),
+                      ),
+                    ],
                   ),
               ],
             ),
@@ -226,13 +244,19 @@ class _BillSplitterPageState extends State<BillSplitterPage> {
             Text('Resumen', style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 12),
             if (_hasFixedPayer)
-              _summaryLine('Pago fijo', _fixedAmount, '1 persona'),
+              _summaryLine(
+                'Pago fijo',
+                _fixedAmountPerPerson,
+                '$_fixedPeople personas',
+              ),
             _summaryLine('Pagan menos', _lessShare, '$_safeLessPeople personas'),
             _summaryLine('Normal', _normalShare, '$_normalPeople personas'),
             _summaryLine('Pagan mas', _moreShare, '$_safeMorePeople personas'),
             const Divider(height: 28),
             Text('Propina: \$${_tipAmount.toStringAsFixed(2)}'),
             Text('Total con propina: \$${_grandTotal.toStringAsFixed(2)}'),
+            if (_hasFixedPayer)
+              Text('Total fijo: \$${_fixedTotal.toStringAsFixed(2)}'),
             Text('Restante a repartir: \$${_remainingTotal.toStringAsFixed(2)}'),
           ],
         ),
@@ -248,6 +272,7 @@ class _BillSplitterPageState extends State<BillSplitterPage> {
           Expanded(child: Text('$label ($detail)')),
           Text(
             '\$${amount.toStringAsFixed(2)}',
+            key: Key('$label-amount'),
             style: const TextStyle(fontWeight: FontWeight.bold),
           ),
         ],
