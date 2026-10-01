@@ -43,7 +43,7 @@ flutter run
 3. Ingresar `50.00`, `0` personas. Tocar `Calcular`.
    Resultado esperado: `Debe haber al menos una persona` y sin resultado.
 4. Ingresar monto `abc`. Tocar `Calcular`.
-   Resultado esperado: `Monto invalido` y sin resultado.
+   Resultado esperado: `Monto inválido` y sin resultado.
 5. Ingresar `10.00`, `3` personas, `0%`, modo exacto. Tocar `Calcular`.
    Resultado esperado: `3.33`.
 6. Ingresar `10.00`, `3` personas, `0%`, modo hacia arriba. Tocar `Calcular`.

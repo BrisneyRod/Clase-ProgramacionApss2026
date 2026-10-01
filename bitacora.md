@@ -63,15 +63,15 @@ Configuracion de razonamiento: misma sesion/configuracion usada para `vibe` y `s
 
 | Metrica | Rama vibe | Rama sdd |
 | --- | --- | --- |
-| Iteraciones (veces que le tuviste que volver a pedir algo) |  |  |
-| Casos de aceptacion que cumple (0-6) |  |  |
-| Pruebas automatizadas que pasan |  |  |
-| Archivos en `lib/` |  |  |
-| Lineas de codigo en `lib/` |  |  |
-| `domain/` depende de Flutter? |  |  |
-| Existe separacion `presentation/domain/data`? |  |  |
-| El agente agrego algo que nadie pidio? |  |  |
-| Se puede agregar otra estrategia sin modificar el calculo existente? |  |  |
+| Iteraciones (veces que le tuviste que volver a pedir algo) |  | 0 |
+| Casos de aceptacion que cumple (0-6) |  | 6/6 |
+| Pruebas automatizadas que pasan |  | 23 |
+| Archivos en `lib/` |  | 11 |
+| Lineas de codigo en `lib/` |  | 332 |
+| `domain/` depende de Flutter? |  | No |
+| Existe separacion `presentation/domain/data`? |  | Si |
+| El agente agrego algo que nadie pidio? |  | No; se agrego validacion de negativos por Clarify |
+| Se puede agregar otra estrategia sin modificar el calculo existente? |  | Si |
 
 ## Metrica secundaria opcional
 
@@ -124,3 +124,50 @@ Resultado:
   verificacion. Se agrego `T042` en `tasks.md`.
 - Las referencias a `package:flutter` en artefactos son intencionales: aparecen
   para prohibir imports de Flutter en `lib/domain/`.
+
+## Implementacion SDD
+
+Resultado de implementacion:
+
+- Estructura creada segun el plan: `lib/domain`, `lib/data`, `lib/presentation`.
+- `flutter analyze`: pasa sin issues.
+- `flutter test`: pasan 23 pruebas.
+- `lib/domain/` no importa `package:flutter`.
+- `main.dart` es el punto de composicion de `RedondeoExacto` y
+  `RedondeoHaciaArriba`.
+- No hay codigo de red ni base de datos en `lib/`.
+- Archivos Dart en `lib/`: 11.
+- Lineas en `lib/`: 332.
+
+## Pruebas ejecutables SDD
+
+Se agregaron los archivos pedidos en la Parte 9:
+
+- `test/casos_de_prueba.dart`: define los 6 casos de aceptacion de la spec.
+- `test/division_test.dart`: recorre `casos`, valida entrada, calcula cuando
+  corresponde y prueba LSP con `RedondeoExacto` y `RedondeoHaciaArriba`.
+- `test/pantalla_test.dart`: cubre los 3 escenarios de widget pedidos en la
+  Parte 9.
+
+Resultado:
+
+- `flutter analyze`: pasa sin issues.
+- `flutter test`: pasan 23 pruebas.
+- `flutter build apk --debug`: construye correctamente
+  `build/app/outputs/flutter-apk/app-debug.apk`.
+- La falla inicial de `division_test.dart` revelo que `RedondeoExacto` devolvia
+  `3.3333...` en vez de `3.33`; se corrigio en `lib/data/redondeo_exacto.dart`.
+
+## Verificacion SOLID con comandos
+
+Resultado:
+
+- DIP/capas: `lib/domain/` no importa `package:flutter`.
+- DIP/composicion: las instancias concretas `RedondeoExacto()` y
+  `RedondeoHaciaArriba()` aparecen solo en `lib/main.dart`. La busqueda amplia
+  tambien encuentra las declaraciones de constructor en `lib/data/`, pero no
+  son instanciaciones.
+- OCP/LSP: `lib/domain/calcular_division.dart` no contiene `is Redondeo` ni
+  `as Redondeo`.
+- SRP: `lib/domain/calcular_division.dart` no contiene `toStringAsFixed`,
+  `inválido` ni `al menos una persona`.

@@ -12,7 +12,7 @@ Representa los datos numericos necesarios para calcular la division.
 
 **Validation Rules**:
 
-- Si `montoTotal` no es numerico, el resultado de validacion es `Monto invalido`.
+- Si `montoTotal` no es numerico, el resultado de validacion es `Monto inválido`.
 - Si `numeroPersonas` es menor que `1`, el resultado de validacion es
   `Debe haber al menos una persona`.
 - Si cualquier campo numerico es negativo, el resultado de validacion es un

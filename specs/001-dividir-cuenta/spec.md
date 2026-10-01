@@ -78,13 +78,13 @@ que aparece el mensaje esperado y no se muestra un resultado.
    **Then** se muestra `Debe haber al menos una persona` y no se muestra
    resultado.
 2. **Given** monto `abc`, **When** el usuario toca "Calcular", **Then** se
-   muestra `Monto invalido` y no se muestra resultado.
+   muestra `Monto inválido` y no se muestra resultado.
 
 ### Edge Cases
 
 - Si el numero de personas es `0`, la app debe mostrar `Debe haber al menos una
   persona` y no debe mostrar resultado.
-- Si el monto no es numerico, la app debe mostrar `Monto invalido` y no debe
+- Si el monto no es numerico, la app debe mostrar `Monto inválido` y no debe
   mostrar resultado.
 - Si el monto, numero de personas o porcentaje de propina es negativo, la app
   debe mostrar un mensaje de error y no debe mostrar resultado.
@@ -113,7 +113,7 @@ que aparece el mensaje esperado y no se muestra un resultado.
 - **FR-008**: Si el numero de personas es menor que `1`, la app MUST mostrar
   `Debe haber al menos una persona` y MUST NOT mostrar resultado.
 - **FR-009**: Si el monto total no es numerico, la app MUST mostrar `Monto
-  invalido` y MUST NOT mostrar resultado.
+  inválido` y MUST NOT mostrar resultado.
 - **FR-010**: La app MUST funcionar sin conexion, sin red y sin base de datos.
 - **FR-011**: Si monto total, numero de personas o porcentaje de propina es
   negativo, la app MUST mostrar un mensaje de error y MUST NOT mostrar resultado.

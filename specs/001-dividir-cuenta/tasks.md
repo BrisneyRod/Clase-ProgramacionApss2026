@@ -18,9 +18,9 @@
 
 **Purpose**: Prepare the Flutter project structure without changing scope or dependencies.
 
-- [ ] T001 Create folders `lib/domain`, `lib/data`, `lib/presentation`, `test/domain`, `test/data`, and `test/presentation`
-- [ ] T002 Replace the Flutter counter template entry point with an empty composition shell in `lib/main.dart`
-- [ ] T003 [P] Confirm no external dependencies were added in `pubspec.yaml`
+- [X] T001 Create folders `lib/domain`, `lib/data`, `lib/presentation`, `test/domain`, `test/data`, and `test/presentation`
+- [X] T002 Replace the Flutter counter template entry point with an empty composition shell in `lib/main.dart`
+- [X] T003 [P] Confirm no external dependencies were added in `pubspec.yaml`
 
 ---
 
@@ -30,15 +30,15 @@
 
 **CRITICAL**: No user story work can begin until this phase is complete.
 
-- [ ] T004 [P] Create `EstrategiaRedondeo` with one method in `lib/domain/estrategia_redondeo.dart`
-- [ ] T005 [P] Create `Cuenta` with fields `montoTotal`, `numeroPersonas`, and `porcentajePropina` in `lib/domain/cuenta.dart`
-- [ ] T006 [P] Create `Resultado` with field `pagoPorPersona` in `lib/domain/resultado.dart`
-- [ ] T007 Create `CalcularDivision` in `lib/domain/calcular_division.dart` using `Cuenta` and `EstrategiaRedondeo`, without validation or formatting
-- [ ] T008 Create `ValidarEntrada` in `lib/domain/validar_entrada.dart` to convert text input into `Cuenta` or an error message
-- [ ] T009 [P] Create `RedondeoExacto` in `lib/data/redondeo_exacto.dart` implementing `EstrategiaRedondeo`
-- [ ] T010 [P] Create `RedondeoHaciaArriba` in `lib/data/redondeo_hacia_arriba.dart` implementing `EstrategiaRedondeo`
-- [ ] T011 [P] Create `FormateadorMoneda` in `lib/presentation/formateador_moneda.dart` to display values with two decimals
-- [ ] T012 Create `DivisorController` in `lib/presentation/divisor_controller.dart` receiving `ValidarEntrada`, `CalcularDivision`, and rounding strategies by constructor
+- [X] T004 [P] Create `EstrategiaRedondeo` with one method in `lib/domain/estrategia_redondeo.dart`
+- [X] T005 [P] Create `Cuenta` with fields `montoTotal`, `numeroPersonas`, and `porcentajePropina` in `lib/domain/cuenta.dart`
+- [X] T006 [P] Create `Resultado` with field `pagoPorPersona` in `lib/domain/resultado.dart`
+- [X] T007 Create `CalcularDivision` in `lib/domain/calcular_division.dart` using `Cuenta` and `EstrategiaRedondeo`, without validation or formatting
+- [X] T008 Create `ValidarEntrada` in `lib/domain/validar_entrada.dart` to convert text input into `Cuenta` or an error message
+- [X] T009 [P] Create `RedondeoExacto` in `lib/data/redondeo_exacto.dart` implementing `EstrategiaRedondeo`
+- [X] T010 [P] Create `RedondeoHaciaArriba` in `lib/data/redondeo_hacia_arriba.dart` implementing `EstrategiaRedondeo`
+- [X] T011 [P] Create `FormateadorMoneda` in `lib/presentation/formateador_moneda.dart` to display values with two decimals
+- [X] T012 Create `DivisorController` in `lib/presentation/divisor_controller.dart` receiving `ValidarEntrada`, `CalcularDivision`, and rounding strategies by constructor
 
 **Checkpoint**: Foundation ready; user story implementation can begin.
 
@@ -52,18 +52,18 @@
 
 ### Tests for User Story 1
 
-- [ ] T013 [P] [US1] Add domain test for `100.00`, `4`, `10%`, exact -> `27.50` in `test/domain/calcular_division_test.dart`
-- [ ] T014 [P] [US1] Add domain test for `90.00`, `3`, `0%`, exact -> `30.00` in `test/domain/calcular_division_test.dart`
-- [ ] T015 [P] [US1] Add domain test for `10.00`, `3`, `0%`, exact -> `3.33` in `test/domain/calcular_division_test.dart`
-- [ ] T016 [P] [US1] Add widget test for valid exact calculation in `test/presentation/pantalla_divisor_test.dart`
+- [X] T013 [P] [US1] Add domain test for `100.00`, `4`, `10%`, exact -> `27.50` in `test/domain/calcular_division_test.dart`
+- [X] T014 [P] [US1] Add domain test for `90.00`, `3`, `0%`, exact -> `30.00` in `test/domain/calcular_division_test.dart`
+- [X] T015 [P] [US1] Add domain test for `10.00`, `3`, `0%`, exact -> `3.33` in `test/domain/calcular_division_test.dart`
+- [X] T016 [P] [US1] Add widget test for valid exact calculation in `test/presentation/pantalla_divisor_test.dart`
 
 ### Implementation for User Story 1
 
-- [ ] T017 [US1] Implement exact calculation flow in `lib/domain/calcular_division.dart`
-- [ ] T018 [US1] Implement exact result formatting through `lib/presentation/formateador_moneda.dart`
-- [ ] T019 [US1] Implement `DivisorController` success state in `lib/presentation/divisor_controller.dart`
-- [ ] T020 [US1] Implement amount, people, tip fields and `Calcular` button in `lib/presentation/pantalla_divisor.dart`
-- [ ] T021 [US1] Wire `PantallaDivisor` dependencies only in `lib/main.dart`
+- [X] T017 [US1] Implement exact calculation flow in `lib/domain/calcular_division.dart`
+- [X] T018 [US1] Implement exact result formatting through `lib/presentation/formateador_moneda.dart`
+- [X] T019 [US1] Implement `DivisorController` success state in `lib/presentation/divisor_controller.dart`
+- [X] T020 [US1] Implement amount, people, tip fields and `Calcular` button in `lib/presentation/pantalla_divisor.dart`
+- [X] T021 [US1] Wire `PantallaDivisor` dependencies only in `lib/main.dart`
 
 **Checkpoint**: US1 works independently with exact mode for valid entries.
 
@@ -77,16 +77,16 @@
 
 ### Tests for User Story 2
 
-- [ ] T022 [P] [US2] Add data test for `RedondeoHaciaArriba` with `3.33` -> `4.00` in `test/data/estrategia_redondeo_test.dart`
-- [ ] T023 [P] [US2] Add data test for `RedondeoHaciaArriba` with integer value unchanged in `test/data/estrategia_redondeo_test.dart`
-- [ ] T024 [P] [US2] Add widget test for `10.00`, `3`, `0%`, upward mode -> `4.00` in `test/presentation/pantalla_divisor_test.dart`
+- [X] T022 [P] [US2] Add data test for `RedondeoHaciaArriba` with `3.33` -> `4.00` in `test/data/estrategia_redondeo_test.dart`
+- [X] T023 [P] [US2] Add data test for `RedondeoHaciaArriba` with integer value unchanged in `test/data/estrategia_redondeo_test.dart`
+- [X] T024 [P] [US2] Add widget test for `10.00`, `3`, `0%`, upward mode -> `4.00` in `test/presentation/pantalla_divisor_test.dart`
 
 ### Implementation for User Story 2
 
-- [ ] T025 [US2] Implement upward rounding in `lib/data/redondeo_hacia_arriba.dart`
-- [ ] T026 [US2] Implement exact rounding in `lib/data/redondeo_exacto.dart`
-- [ ] T027 [US2] Add rounding mode selection to `lib/presentation/pantalla_divisor.dart`
-- [ ] T028 [US2] Route selected rounding strategy through `lib/presentation/divisor_controller.dart`
+- [X] T025 [US2] Implement upward rounding in `lib/data/redondeo_hacia_arriba.dart`
+- [X] T026 [US2] Implement exact rounding in `lib/data/redondeo_exacto.dart`
+- [X] T027 [US2] Add rounding mode selection to `lib/presentation/pantalla_divisor.dart`
+- [X] T028 [US2] Route selected rounding strategy through `lib/presentation/divisor_controller.dart`
 
 **Checkpoint**: US1 and US2 both work independently.
 
@@ -100,18 +100,18 @@
 
 ### Tests for User Story 3
 
-- [ ] T029 [P] [US3] Add validation test for `0` people -> `Debe haber al menos una persona` in `test/domain/validar_entrada_test.dart`
-- [ ] T030 [P] [US3] Add validation test for amount `abc` -> `Monto invalido` in `test/domain/validar_entrada_test.dart`
-- [ ] T031 [P] [US3] Add validation test for negative amount, people, or tip -> error in `test/domain/validar_entrada_test.dart`
-- [ ] T032 [P] [US3] Add widget test that invalid input hides result in `test/presentation/pantalla_divisor_test.dart`
+- [X] T029 [P] [US3] Add validation test for `0` people -> `Debe haber al menos una persona` in `test/domain/validar_entrada_test.dart`
+- [X] T030 [P] [US3] Add validation test for amount `abc` -> `Monto inválido` in `test/domain/validar_entrada_test.dart`
+- [X] T031 [P] [US3] Add validation test for negative amount, people, or tip -> error in `test/domain/validar_entrada_test.dart`
+- [X] T032 [P] [US3] Add widget test that invalid input hides result in `test/presentation/pantalla_divisor_test.dart`
 
 ### Implementation for User Story 3
 
-- [ ] T033 [US3] Implement invalid amount handling in `lib/domain/validar_entrada.dart`
-- [ ] T034 [US3] Implement people count validation in `lib/domain/validar_entrada.dart`
-- [ ] T035 [US3] Implement negative value validation in `lib/domain/validar_entrada.dart`
-- [ ] T036 [US3] Display errors and clear result state in `lib/presentation/divisor_controller.dart`
-- [ ] T037 [US3] Render error messages without result in `lib/presentation/pantalla_divisor.dart`
+- [X] T033 [US3] Implement invalid amount handling in `lib/domain/validar_entrada.dart`
+- [X] T034 [US3] Implement people count validation in `lib/domain/validar_entrada.dart`
+- [X] T035 [US3] Implement negative value validation in `lib/domain/validar_entrada.dart`
+- [X] T036 [US3] Display errors and clear result state in `lib/presentation/divisor_controller.dart`
+- [X] T037 [US3] Render error messages without result in `lib/presentation/pantalla_divisor.dart`
 
 **Checkpoint**: All acceptance scenarios are independently testable.
 
@@ -121,13 +121,13 @@
 
 **Purpose**: Verify architecture, commands, and documentation.
 
-- [ ] T038 [P] Run `flutter analyze` and record result in `bitacora.md`
-- [ ] T039 [P] Run `flutter test` and record result in `bitacora.md`
-- [ ] T040 Verify `lib/domain/` has no `package:flutter` imports and record result in `bitacora.md`
-- [ ] T041 Verify `main.dart` is the only file instantiating concrete data implementations and record result in `bitacora.md`
-- [ ] T042 Verify the implementation uses no network access or database code and record result in `bitacora.md`
-- [ ] T043 Count files and lines in `lib/` and update `bitacora.md`
-- [ ] T044 Review every generated function for student explainability and update `bitacora.md`
+- [X] T038 [P] Run `flutter analyze` and record result in `bitacora.md`
+- [X] T039 [P] Run `flutter test` and record result in `bitacora.md`
+- [X] T040 Verify `lib/domain/` has no `package:flutter` imports and record result in `bitacora.md`
+- [X] T041 Verify `main.dart` is the only file instantiating concrete data implementations and record result in `bitacora.md`
+- [X] T042 Verify the implementation uses no network access or database code and record result in `bitacora.md`
+- [X] T043 Count files and lines in `lib/` and update `bitacora.md`
+- [X] T044 Review every generated function for student explainability and update `bitacora.md`
 
 ---
 

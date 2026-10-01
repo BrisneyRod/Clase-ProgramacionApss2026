@@ -27,7 +27,7 @@ error y no debe mostrar un resultado anterior como si fuera vigente.
 
 Mensajes obligatorios:
 
-- `Monto invalido`
+- `Monto inválido`
 - `Debe haber al menos una persona`
 
 Para valores negativos, la pantalla debe mostrar un mensaje de error claro y no
@@ -40,6 +40,6 @@ mostrar resultado.
 | 100.00, 4 personas, 10% | Exacto | 27.50 |
 | 90.00, 3 personas, 0% | Exacto | 30.00 |
 | 50.00, 0 personas | Cualquier modo | Debe haber al menos una persona |
-| abc, cualquier personas | Cualquier modo | Monto invalido |
+| abc, cualquier personas | Cualquier modo | Monto inválido |
 | 10.00, 3 personas, 0% | Exacto | 3.33 |
 | 10.00, 3 personas, 0% | Hacia arriba | 4.00 |
