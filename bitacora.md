@@ -142,3 +142,49 @@ Resultado contra los criterios de aceptacion SDD: `vibe` cumple 3 de 6 por
 revision del codigo y ejecucion de la app en emulador. Para correr las pruebas
 automatizadas habria que extraer clases equivalentes a las de `sdd` o reescribir
 las pruebas para la interfaz monolitica de `vibe`.
+
+Distincion pedida por la guia:
+
+1. Testabilidad y estructura: las pruebas de dominio de `sdd` no se pueden
+   reutilizar en `vibe` porque `vibe` no tiene contratos ni puntos de prueba
+   equivalentes. No existen `domain/`, `data/` ni `presentation/`; solo existe
+   `lib/main.dart`.
+2. Comportamiento: que las pruebas no compilen no significa por si solo que la
+   app `vibe` funcione mal. Por revision manual/codigo, la interfaz cubre 3 de
+   los 6 escenarios de la spec SDD y no cubre las validaciones ni el redondeo
+   hacia arriba.
+
+Verificaciones SOLID simples en `vibe`:
+
+```bash
+grep -rn "package:flutter" lib/
+```
+
+Resultado equivalente en PowerShell:
+
+```text
+lib/main.dart:1:import 'package:flutter/material.dart';
+```
+
+Interpretacion: no hay una capa libre de Flutter que concentre el dominio; el
+unico archivo de `lib/` depende directamente de Flutter.
+
+```bash
+ls lib/
+```
+
+Resultado:
+
+```text
+main.dart
+```
+
+Interpretacion: no existe `domain/` en `vibe`.
+
+Despues de la copia temporal de pruebas se ejecuto:
+
+```bash
+git restore --source=HEAD --staged --worktree test/
+```
+
+Resultado: `test/` volvio a su estado original en la rama `vibe`.
