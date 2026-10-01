@@ -48,21 +48,21 @@ origin https://github.com/BrisneyRod/Clase-ProgramacionApss2026.git
 
 | Metrica | Rama vibe | Rama sdd |
 | --- | --- | --- |
-| Iteraciones (veces que le tuviste que volver a pedir algo) | 3 |  |
-| Casos de aceptacion que cumple (0-6) | 6/6 por revision manual |  |
-| Pruebas automatizadas que pasan | No confirmado: `flutter test` se bloqueo sin salida |  |
-| Archivos en `lib/` | 1 |  |
-| Lineas de codigo en `lib/` | 282 |  |
-| `domain/` depende de Flutter? | No existe `domain/` |  |
-| Existe separacion `presentation/domain/data`? | No |  |
-| El agente agrego algo que nadie pidio? | Si: pesos 75%/100%/125% definidos por el agente |  |
-| Se puede agregar otra estrategia sin modificar el calculo existente? | No |  |
+| Iteraciones (veces que le tuviste que volver a pedir algo) | 3 | 0 |
+| Casos de aceptacion que cumple (0-6) | 3/6 contra la spec SDD | 6/6 |
+| Pruebas automatizadas que pasan | Las pruebas SDD no compilan en `vibe`; prueba propia previa no confiable | 23 |
+| Archivos en `lib/` | 1 | 11 |
+| Lineas de codigo en `lib/` | 282 | 332 |
+| `domain/` depende de Flutter? | No existe `domain/` | No |
+| Existe separacion `presentation/domain/data`? | No | Si |
+| El agente agrego algo que nadie pidio? | Si: pesos 75%/100%/125% definidos por el agente | No en la implementacion; solo rechazo de negativos por clarify |
+| Se puede agregar otra estrategia sin modificar el calculo existente? | No | Si |
 
 ## Metrica secundaria opcional
 
 | Metrica secundaria opcional | Rama vibe | Rama sdd |
 | --- | --- | --- |
-| Tiempo aproximado hasta cumplir los 6 escenarios | No registrado |  |
+| Tiempo aproximado hasta cumplir los 6 escenarios | No registrado | No registrado |
 
 ## Decisiones de conteo
 
@@ -188,3 +188,69 @@ git restore --source=HEAD --staged --worktree test/
 ```
 
 Resultado: `test/` volvio a su estado original en la rama `vibe`.
+
+## Parte 11: comparacion de mantenibilidad
+
+Comando ejecutado:
+
+```bash
+git diff vibe sdd --stat
+```
+
+Resumen del resultado:
+
+```text
+59 files changed, 6423 insertions(+), 408 deletions(-)
+```
+
+El diff incluye los artefactos de Spec Kit, la constitucion, la spec, el plan,
+las tareas, las pruebas y la reorganizacion de `lib/`. En codigo de app, la
+diferencia principal es que `vibe` concentra la app en `lib/main.dart`, mientras
+que `sdd` separa responsabilidades en 11 archivos:
+
+```text
+lib/domain/
+lib/data/
+lib/presentation/
+lib/main.dart
+```
+
+### Si volviera en dos semanas
+
+Retomaria mas facilmente la rama `sdd`. Tiene spec, plan, tareas, pruebas y
+archivos con responsabilidades pequenas. En `vibe`, tendria que releer casi todo
+`main.dart` para entender que parte valida, que parte calcula, que parte dibuja
+y que decisiones fueron agregadas durante la conversacion.
+
+### Si un companero se suma manana
+
+En `sdd` le mandaria:
+
+- `.specify/memory/constitution.md`
+- `specs/001-dividir-cuenta/spec.md`
+- `specs/001-dividir-cuenta/plan.md`
+- `specs/001-dividir-cuenta/tasks.md`
+- `test/casos_de_prueba.dart`
+- `test/division_test.dart`
+
+Con esos archivos puede entender requisitos, arquitectura, tareas y pruebas sin
+depender de la conversacion original. En `vibe`, principalmente tendria que
+mandarle `lib/main.dart` y explicarle de palabra las decisiones que quedaron
+mezcladas en la interfaz.
+
+### Si el cliente pide redondear al multiplo de 5 mas cercano
+
+En `sdd` se sabe exactamente que hacer: crear una nueva implementacion en
+`lib/data/`, por ejemplo `redondeo_multiplo_cinco.dart`, que implemente
+`EstrategiaRedondeo`. El archivo que no deberia tocarse es
+`lib/domain/calcular_division.dart`, porque el calculo depende de la abstraccion
+y no de una clase concreta.
+
+En `vibe` no hay una interfaz de estrategia ni separacion de dominio, asi que
+habria que modificar `lib/main.dart` directamente. Eso aumenta el riesgo de
+tocar al mismo tiempo calculo, estado e interfaz.
+
+Conclusion de mantenibilidad: `sdd` requiere mas archivos y mas artefactos, pero
+deja mas claro donde leer, probar y extender. `vibe` avanzo rapido para una app
+visual, pero es mas dificil de comprobar y modificar sin reabrir decisiones de
+diseno dentro del mismo archivo.
