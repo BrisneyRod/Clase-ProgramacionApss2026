@@ -58,6 +58,27 @@ void main() {
     expect(resultados[0].pagoPorPersona, closeTo(3.33, 0.001));
     expect(resultados[1].pagoPorPersona, closeTo(4.00, 0.001));
   });
+
+  test('rechaza una propina mayor al 100%', () {
+    final validacion = validarEntrada.ejecutar(
+      montoTexto: '100.00',
+      personasTexto: '4',
+      propinaTexto: '150',
+    );
+
+    expect(validacion.esValido, isFalse);
+    expect(validacion.error, 'La propina no puede superar el 100%');
+  });
+
+  test('permite una propina exactamente del 100%', () {
+    final validacion = validarEntrada.ejecutar(
+      montoTexto: '100.00',
+      personasTexto: '4',
+      propinaTexto: '100',
+    );
+
+    expect(validacion.esValido, isTrue);
+  });
 }
 
 String _textoMonto(double monto) {
