@@ -16,6 +16,8 @@ class ResultadoValidacion {
 class ValidarEntrada {
   const ValidarEntrada();
 
+  static const maximoPorcentajePropina = 100;
+
   ResultadoValidacion ejecutar({
     required String montoTexto,
     required String personasTexto,
@@ -34,6 +36,12 @@ class ValidarEntrada {
     if (monto < 0 || propina < 0) {
       return const ResultadoValidacion.invalido(
         'No se permiten valores negativos',
+      );
+    }
+
+    if (propina > maximoPorcentajePropina) {
+      return const ResultadoValidacion.invalido(
+        'La propina no puede superar el 100%',
       );
     }
 
