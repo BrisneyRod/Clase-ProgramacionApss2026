@@ -14,6 +14,10 @@ la automatización solicitada en el Deber 4.
 - `.github/workflows/flutter-ci.yml`: pipeline de CI/CD.
 - `evidencias/`: capturas del deber y resultados de GitHub Actions.
 
+Las carpetas `parte_a_contador/`, `parte_b_conexion/` y el archivo `demo.mp4`
+son trabajos anteriores conservados en el repositorio; no forman parte de la
+entrega del Deber 4. La entrega actual es el proyecto Flutter de la raíz.
+
 ## Comandos locales
 
 ```bash
