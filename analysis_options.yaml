@@ -11,6 +11,8 @@ include: package:flutter_lints/flutter.yaml
 
 analyzer:
   exclude:
+    - parte_a_contador/**
+    - parte_b_conexion/**
     - build/**
     - android/**
     - ios/**
