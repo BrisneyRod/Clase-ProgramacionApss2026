@@ -1,11 +1,12 @@
 # Evidencias del Deber 4
 
-Guardar aquí las capturas con nombres claros y en este orden:
+Capturas de la entrega, enlazadas desde `respuestas.md`:
 
-1. `01-repositorio-publico.png` — repositorio público y rama `main`.
-2. `02-pruebas-locales.png` — `flutter test` en verde.
-3. `03-workflow-exitoso.png` — GitHub Actions con analyze, test y build exitosos.
-4. `04-proteccion-main.png` — regla de protección de `main`.
-5. `05-apk-artifacto.png` — APK disponible como artefacto de Actions.
+1. `parte1_ci_verde.png`: primer pull request con CI aprobado.
+2. `parte2_proteccion.png`: regla de protección de `main` y check `ci` requerido.
+3. `parte3_rojo.png`: log del test fallido.
+4. `parte3_merge_bloqueado.png`: merge deshabilitado por CI rojo.
+5. `parte3_verde_otra_vez.png`: mismo PR tras corregir el test.
+6. `parte4_artifact.png`: jobs `ci` y `entrega` en verde con el artifact del APK.
 
 No guardar contraseñas, tokens ni información privada en esta carpeta.
