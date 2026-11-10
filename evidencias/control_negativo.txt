@@ -1,0 +1,12 @@
+Control negativo
+================
+
+Solicitud:
+“Muéstrame cuántos eventos hay por hora en este CSV; no investigues incidentes
+ni clasifiques amenazas.”
+
+Resultado esperado por la description del skill: no activarlo, porque es una
+petición descriptiva sin investigación de incidentes.
+
+Lo observado: no existe una traza nativa del selector de skills en este entorno;
+por tanto se documenta el criterio y no se inventa una captura.

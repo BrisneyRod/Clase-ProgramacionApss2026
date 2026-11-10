@@ -1,0 +1,17 @@
+Prueba B — activación contextual
+=================================
+
+Solicitud evaluada sin nombrar el skill:
+“Revisa estos registros de autenticación. ¿Ves intentos sospechosos, cambios no
+aprobados o posibles secretos expuestos? Cita las filas que respaldan cada
+alerta.”
+
+Resultado observado: este entorno no expone una traza de autoactivación y el
+skill está colocado dentro del repositorio, no registrado globalmente en el
+selector de skills. Por eso no se afirma que la descripción lo haya activado
+automáticamente.
+
+Inferencia permitida: la `description` contiene las señales positivas de esta
+solicitud (accesos sospechosos, secretos expuestos y cambios no aprobados), por
+lo que un agente con descubrimiento contextual podría seleccionarlo. Esa
+selección no fue observada aquí.

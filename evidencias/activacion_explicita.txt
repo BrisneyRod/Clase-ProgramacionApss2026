@@ -1,0 +1,19 @@
+Prueba A — activación explícita
+===============================
+
+Solicitud ejecutada:
+“Utiliza `incident-investigator` para investigar `logs_sinteticos.csv` y entrega
+hallazgos con filas de evidencia.”
+
+Lo observado realmente en el entorno:
+
+1. Se leyó `incident-investigator/SKILL.md` desde el repositorio.
+2. Se leyó `incident-investigator/references/detection-rules.md` desde el
+   repositorio.
+3. Se leyó el CSV original desde
+   `C:\Users\brisn\Downloads\logs_sinteticos.csv`, sin modificarlo.
+4. El resultado verificable quedó en `hallazgos.md`, con filas 17–28, 33, 38,
+   39, 41, 42, 59, 67, 68, 70, 71, 73, 74 y 78, 80–84 según la alerta.
+
+Esto demuestra lectura explícita de los recursos y aplicación de sus reglas en
+esta sesión. No se presenta como una captura nativa del selector de skills.

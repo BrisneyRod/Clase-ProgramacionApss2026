@@ -1,0 +1,39 @@
+Misión 4 — ajuste y repetición
+==============================
+
+Motivo del ajuste: en la Prueba B contextual anterior no se observó
+autoactivación. Como este entorno no expone el selector/trazador de skills, no
+se puede demostrar que el cambio haya producido una activación automática; se
+registra el cambio y la decisión observable sin inventar una traza.
+
+Cambio realizado en la `description` de `incident-investigator/SKILL.md`:
+
+- Se añadieron señales positivas más literales: “investigar un incidente”,
+  “intentos sospechosos/no autorizados”, “fuerza bruta”, “password spraying”,
+  “tokens o secretos” y “cambios de rol no aprobados”.
+- Se añadieron ejemplos negativos explícitos: “cuántos eventos hay por hora”,
+  conteos, agregaciones, resúmenes y visualizaciones cuando se excluye la
+  investigación de amenazas.
+
+Repetición de B, sin nombrar el skill:
+
+Solicitud: “Revisa estos registros de autenticación. ¿Ves intentos sospechosos,
+cambios no aprobados o posibles secretos expuestos? Cita las filas que
+respalden cada alerta.”
+
+Resultado observado: la nueva `description` coincide con las señales positivas,
+pero este entorno todavía no expone un evento de autoactivación. Se mantiene la
+conclusión honesta: activación contextual no observada, potencialmente
+seleccionable por un agente que sí tenga descubrimiento contextual.
+
+Prueba C, control negativo:
+
+Solicitud: “Muéstrame cuántos eventos hay por hora en este CSV; no investigues
+incidentes ni clasifiques amenazas.”
+
+Resultado esperado y decisión: no usar `incident-investigator`. Es una petición
+descriptiva y coincide con la exclusión explícita de la `description`. La
+descripción por hora puede resolverse sin leer las reglas de incidentes.
+
+Resultado descriptivo obtenido sin clasificar amenazas: `2026-11-05 01:00 -05:00`
+→ 63 eventos; `2026-11-05 02:00 -05:00` → 30 eventos.
